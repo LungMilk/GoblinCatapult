@@ -1,10 +1,12 @@
 using NodeCanvas.Framework;
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NavigateAT : ActionTask
 {
+    [SerializeField] private Seeker seekAI;
     public BBParameter<Vector3> velocity;
     public BBParameter<Vector3> accel;
     public BBParameter<float> maxGroundSpeed;
@@ -25,5 +27,4 @@ public class NavigateAT : ActionTask
         agent.transform.position += velocity.value * Time.deltaTime;
         accel.value = Vector3.zero;
     }
-
 }
