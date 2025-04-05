@@ -927,7 +927,7 @@ namespace NodeCanvas.Editor
                 var headerRect = new Rect(group.rect.x, group.rect.y, group.rect.width, 25);
                 var autoRect = new Rect(headerRect.xMax - 68, headerRect.y + 1, 68, headerRect.height);
                 var scaleRectBR = new Rect(group.rect.xMax - 20, group.rect.yMax - 20, 20, 20);
-                var notesRect = new Rect(group.rect.x, headerRect.yMax, group.rect.width, group.rect.height - headerRect.height);
+                var scaleRectTL = new Rect(group.rect.x, headerRect.yMax, 20, 20);
 
                 GUI.color = EditorGUIUtility.isProSkin ? new Color(1, 1, 1, 0.4f) : new Color(0.5f, 0.5f, 0.5f, 0.3f);
                 Styles.Draw(group.rect, StyleSheet.editorPanel);
@@ -938,8 +938,6 @@ namespace NodeCanvas.Editor
                 }
 
                 GUI.color = Color.white;
-                GUI.Box(new Rect(scaleRectBR.x + 10, scaleRectBR.y + 10, 6, 6), string.Empty, StyleSheet.scaleArrowBR);
-
 
                 if ( group.editState != CanvasGroup.EditState.RenamingTitle ) {
                     var size = StyleSheet.canvasGroupHeader.fontSize / zoomFactor;
@@ -948,6 +946,7 @@ namespace NodeCanvas.Editor
 
                     EditorGUIUtility.AddCursorRect(headerRect, group.editState == CanvasGroup.EditState.RenamingTitle ? MouseCursor.Text : MouseCursor.Link);
                     EditorGUIUtility.AddCursorRect(scaleRectBR, MouseCursor.ResizeUpLeft);
+                    EditorGUIUtility.AddCursorRect(scaleRectTL, MouseCursor.ResizeUpLeft);
 
                     GUI.color = GUI.color.WithAlpha(0.25f);
                     var newAutoValue = GUI.Toggle(autoRect, group.autoGroup, "Autosize");
@@ -1021,16 +1020,18 @@ namespace NodeCanvas.Editor
                         e.Use();
                     }
 
-                    if ( e.button == 0 && scaleRectBR.Contains(e.mousePosition) ) {
+                    if ( e.button == 0 ) {
                         UndoUtility.RecordObjectComplete(currentGraph, "Scale Canvas Group");
-                        group.editState = CanvasGroup.EditState.Scaling;
-                        UndoUtility.SetDirty(currentGraph);
-                        e.Use();
-                    }
-
-                    if ( !string.IsNullOrEmpty(group.notes) && notesRect.Contains(e.mousePosition) ) {
-                        if ( e.button == 0 && e.clickCount == 2 ) {
-                            group.editState = CanvasGroup.EditState.EditingComments;
+                        if ( scaleRectBR.Contains(e.mousePosition) ) {
+                            group.editState = CanvasGroup.EditState.ScalingBR;
+                            UndoUtility.RecordObjectComplete(currentGraph, "Scale Canvas Group");
+                            UndoUtility.SetDirty(currentGraph);
+                            e.Use();
+                        }
+                        if ( scaleRectTL.Contains(e.mousePosition) ) {
+                            group.editState = CanvasGroup.EditState.ScalingTL;
+                            UndoUtility.RecordObjectComplete(currentGraph, "Scale Canvas Group");
+                            UndoUtility.SetDirty(currentGraph);
                             e.Use();
                         }
                     }
@@ -1053,13 +1054,17 @@ namespace NodeCanvas.Editor
                         }
                     }
 
-                    if ( group.editState == CanvasGroup.EditState.Scaling ) {
+                    if ( group.editState == CanvasGroup.EditState.ScalingBR ) {
                         group.rect.xMax = Mathf.Max(e.mousePosition.x + 5, group.rect.xMin + 100);
                         group.rect.yMax = Mathf.Max(e.mousePosition.y + 5, group.rect.yMin + 100);
                     }
+                    if ( group.editState == CanvasGroup.EditState.ScalingTL ) {
+                        group.rect.xMin = Mathf.Min(e.mousePosition.x - 5, group.rect.xMax - 100);
+                        group.rect.yMin = Mathf.Min(e.mousePosition.y - 30, group.rect.yMax - 100);
+                    }
                 }
 
-                if ( e.rawType == EventType.MouseUp && group.editState != CanvasGroup.EditState.RenamingTitle && group.editState != CanvasGroup.EditState.EditingComments ) {
+                if ( e.rawType == EventType.MouseUp && group.editState != CanvasGroup.EditState.RenamingTitle ) {
                     if ( group.editState == CanvasGroup.EditState.Dragging ) {
                         foreach ( var node in group.GatherContainedNodes(currentGraph) ) {
                             node.TrySortConnectionsByRelativePosition();
