@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class NavigateAT : ActionTask
 {
-    [SerializeField] private Seeker seekAI;
+    //[SerializeField] private Seeker seekAI;
     public BBParameter<Vector3> velocity;
     public BBParameter<Vector3> accel;
     public BBParameter<float> maxGroundSpeed;

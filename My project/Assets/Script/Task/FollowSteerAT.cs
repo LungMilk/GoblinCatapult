@@ -20,7 +20,7 @@ public class FollowSteerAT : ActionTask
     }
     protected override void OnExecute()
     {
-        SetPath();
+        //SetPath();
 
         float distanceToTarget = Vector3.Distance(agent.transform.position, target.value.position);
         if (distanceToTarget < stoppingDistance)

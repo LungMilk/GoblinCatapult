@@ -354,11 +354,11 @@ Transform:
   m_GameObject: {fileID: 89439469}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.9, y: 1.26, z: -16.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1087741846}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &122560103
 GameObject:
@@ -1243,7 +1243,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 89439474}
   - {fileID: 1175584744}
   - {fileID: 1527505581}
   - {fileID: 191789903}
@@ -1279,11 +1278,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serializedExposedParameters: []
-  _boundGraphSerialization: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"dynamic":true,"_position":{"x":677.0,"y":229.0},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"0"},{"_action":{"catapultArm":1,"$type":"MoveArmAT"},"_position":{"x":529.0,"y":339.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"1"},{"_action":{"target":{"_value":2},"projectile":{"_value":3},"$type":"CatapultAT"},"_position":{"x":673.0,"y":334.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"2"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
+  _boundGraphSerialization: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"dynamic":true,"_position":{"x":677.0,"y":229.0},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"0"},{"_action":{"transformToRot":1,"target":2,"turnSpeed":2.0,"$type":"RotateToTarget"},"_position":{"x":370.0,"y":338.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"1"},{"_action":{"catapultArm":3,"$type":"MoveArmAT"},"_position":{"x":565.0,"y":339.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"2"},{"_action":{"target":{"_value":2},"projectile":{"_value":4},"$type":"CatapultAT"},"_position":{"x":723.0,"y":335.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"3"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
   _boundGraphObjectReferences:
   - {fileID: 0}
-  - {fileID: 164271564}
+  - {fileID: 1087741846}
   - {fileID: 1478647700}
+  - {fileID: 164271564}
   - {fileID: 89439469}
   _boundGraphSource:
     _version: 3.31
@@ -1666,9 +1666,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentBlackboard: {fileID: 0}
-  _serializedBlackboard: '{"_variables":{}}'
+  _serializedBlackboard: '{"_variables":{"Accel":{"_name":"Accel","_id":"8754ea0c-446a-4628-8541-49bb01a5dc32","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Vector3,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"Velocity":{"_name":"Velocity","_id":"44e5a07b-c17f-4840-a241-456b3c6f6644","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Vector3,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
   _objectReferences: []
-  _serializedVariables: []
+  _serializedVariables:
+  - _json: '{"_name":"Accel","_id":"8754ea0c-446a-4628-8541-49bb01a5dc32","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Vector3,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references: []
+  - _json: '{"_name":"Velocity","_id":"44e5a07b-c17f-4840-a241-456b3c6f6644","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Vector3,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references: []
 --- !u!114 &1363567669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1682,7 +1690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serializedExposedParameters: []
-  _boundGraphSerialization: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"dynamic":true,"_position":{"x":500.0,"y":291.0},"$type":"NodeCanvas.BehaviourTrees.Parallel","$id":"0"},{"_action":{"velocity":{"_value":{"z":2.0}},"accel":{"_value":{"z":1.0}},"maxGroundSpeed":{"_value":5.0},"$type":"NavigateAT"},"_position":{"x":402.0,"y":437.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"1"},{"_action":{"target":{"_value":1},"stoppingDistance":0.4,"accel":{"_value":{"z":2.0}},"steeringAccel":0.5,"$type":"FollowSteerAT"},"_position":{"x":571.0,"y":438.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"2"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
+  _boundGraphSerialization: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"dynamic":true,"_position":{"x":500.0,"y":291.0},"$type":"NodeCanvas.BehaviourTrees.Parallel","$id":"0"},{"_action":{"velocity":{"_name":"Velocity","_targetVariableID":"44e5a07b-c17f-4840-a241-456b3c6f6644"},"accel":{"_name":"Accel","_targetVariableID":"8754ea0c-446a-4628-8541-49bb01a5dc32"},"maxGroundSpeed":{"_value":5.0},"$type":"NavigateAT"},"_position":{"x":402.0,"y":437.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"1"},{"_action":{"target":{"_value":1},"stoppingDistance":0.4,"accel":{"_name":"Accel","_targetVariableID":"8754ea0c-446a-4628-8541-49bb01a5dc32"},"steeringAccel":3.0,"$type":"FollowSteerAT"},"_position":{"x":571.0,"y":438.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"2"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
   _boundGraphObjectReferences:
   - {fileID: 0}
   - {fileID: 1478647700}
@@ -1690,7 +1698,7 @@ MonoBehaviour:
     _version: 3.31
     _category: 
     _comments: 
-    _translation: {x: -16, y: -49}
+    _translation: {x: -26.488768, y: -68.96749}
     _zoomFactor: 1
   _firstActivation: 0
   _enableAction: 0
@@ -2109,6 +2117,7 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 1366293378}
+  - {fileID: 89439474}
   - {fileID: 1087741846}
   - {fileID: 1478647700}
   - {fileID: 1363567667}
