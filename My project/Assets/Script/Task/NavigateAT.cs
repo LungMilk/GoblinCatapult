@@ -26,5 +26,6 @@ public class NavigateAT : ActionTask
 
         agent.transform.position += velocity.value * Time.deltaTime;
         accel.value = Vector3.zero;
+        EndAction(true);
     }
 }
