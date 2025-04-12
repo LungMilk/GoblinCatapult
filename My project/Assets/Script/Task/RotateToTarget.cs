@@ -7,7 +7,7 @@ using Pathfinding.Examples;
 public class RotateToTarget : ActionTask
 {
     public Transform transformToRot;
-    public Transform target;
+    public BBParameter<Transform> target;
     public float turnSpeed;
 
     protected override string OnInit()
@@ -17,7 +17,7 @@ public class RotateToTarget : ActionTask
     }
     protected override void OnUpdate()
     {
-        Quaternion lookRotation =Quaternion.LookRotation((target.position - transformToRot.position).normalized);
+        Quaternion lookRotation =Quaternion.LookRotation((target.value.position - transformToRot.position).normalized);
         lookRotation.x = 0;
         lookRotation.z = 0;
         //over time

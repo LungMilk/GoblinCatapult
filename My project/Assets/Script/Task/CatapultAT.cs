@@ -82,6 +82,5 @@ public class CatapultAT : ActionTask
         {
             projectileBlackboard.SetValue("InCatapult", false);
         }
-    }
-   
+    }  
 }
