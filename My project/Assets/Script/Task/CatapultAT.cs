@@ -27,7 +27,7 @@ public class CatapultAT : ActionTask
         //rb = projectile.value.GetComponentInChildren<Rigidbody>();
         //LaunchProjectile();
         StartCoroutine(projectileMotion());
-        EndAction(true);
+        //EndAction(true);
     }
     void LaunchProjectile()
     {
