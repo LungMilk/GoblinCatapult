@@ -25,7 +25,7 @@ public class ScanAT : ActionTask
         Physics.OverlapSphere(agent.transform.position, sampleRadius.value, playerLayer.value);
         if (playerColliders.Length > 0 && target.value != playerColliders[0].gameObject.transform)
         {
-            Debug.Log(playerColliders[0].name);
+            //Debug.Log(playerColliders[0].name);
             target.value = playerColliders[0].gameObject.transform;
         }
         else
@@ -34,10 +34,11 @@ public class ScanAT : ActionTask
             Physics.OverlapSphere(agent.transform.position, sampleRadius.value, catapultSlotLayer.value);
             if (catapultSlotColliders.Length > 0)
             {
-                Debug.Log(catapultSlotColliders[0].name);
+                //Debug.Log(catapultSlotColliders[0].name);
                 target.value = catapultSlotColliders[0].gameObject.transform;
             }
-            else { Debug.Log("could not find target"); }
+            else { //Debug.Log("could not find target");
+                   }
         }
         EndAction(true);
         //we need to perrform a scan for certain items

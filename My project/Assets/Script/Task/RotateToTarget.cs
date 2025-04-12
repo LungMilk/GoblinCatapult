@@ -22,6 +22,7 @@ public class RotateToTarget : ActionTask
         lookRotation.z = 0;
         //over time
         transformToRot.rotation = Quaternion.Slerp(transformToRot.rotation, lookRotation, Time.deltaTime * turnSpeed);
+        EndAction(true);
     }
 
 

@@ -26,5 +26,6 @@ public class MoveArmAT : ActionTask
 
         // Apply the new rotation
         catapultArm.transform.rotation = Quaternion.Euler(currentRotation.x, catapultArm.transform.rotation.eulerAngles.y, catapultArm.transform.rotation.eulerAngles.z);
+        EndAction(true);
     }
 }

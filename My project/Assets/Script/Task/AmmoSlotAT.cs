@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class AmmoSlotAT : ActionTask
 {
     //ammo slot will, if a gobo is within a short range
-    private bool isOccupied = false;
+    public BBParameter<bool> isOccupied = false;
     public BBParameter<GameObject> projectile;
     public Transform slot;
     public LayerMask projectileLayer;
@@ -21,13 +21,13 @@ public class AmmoSlotAT : ActionTask
     }
     protected override void OnExecute()
     {
-       if (isOccupied) { EndAction(true); return; }
+       if (isOccupied.value) { EndAction(true); return;  }
 
         Collider[] potentialProjectiles =
             Physics.OverlapSphere(slot.position, sampleRadius,projectileLayer);
         if (potentialProjectiles.Length > 0)
         {
-            projectile.value = potentialProjectiles[0].gameObject;
+            projectile.value = potentialProjectiles[0].transform.root.gameObject;
             //we need some way to assign the goblin InCatapult to true
             Blackboard projectileBlackboard =
                 projectile.value.GetComponent<Blackboard>();
@@ -35,7 +35,9 @@ public class AmmoSlotAT : ActionTask
             {
                 projectileBlackboard.SetValue("InCatapult", true);
             }
-            potentialProjectiles[0].gameObject.transform.SetParent(slot.transform, false);
+            //projectile.value.transform.SetParent(slot.transform, false);
+            projectile.value.transform.position = slot.position;
+            isOccupied.value = true;
         }
         EndAction(true);
     }
