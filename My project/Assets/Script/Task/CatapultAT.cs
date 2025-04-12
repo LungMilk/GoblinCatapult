@@ -20,6 +20,7 @@ public class CatapultAT : ActionTask
     }
     void LaunchProjectile()
     {
+        projectile.value.transform.SetParent(null,false);
         //get the direction of where we are aiming the little guy
         Vector3 directionToTarget = target.value.position - agent.transform.position;
         //convert angle to rads
